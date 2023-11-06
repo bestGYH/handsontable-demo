@@ -1,4 +1,5 @@
-import Handsontable from "yn-handsontable";
+import Handsontable from 'handsontable';
+
 
 class ReadOnlyEditor extends Handsontable.editors.TextEditor {
   createElements() {

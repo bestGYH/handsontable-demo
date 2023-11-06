@@ -5,7 +5,7 @@
     <a-checkbox v-model:checked="contextMenu" @change="onChangeMenu">是否启用菜单</a-checkbox>
   </div>
 
-  <div id="example" class="handsonTable" ></div>
+  <div id="BaseDemo" class="handsonTable" ></div>
   </div>
  
 </template>
@@ -96,7 +96,7 @@ let hotOption = {
 
 let pluginManualColumnResize = null
 function initHandsontable() {
-  const container = document.querySelector('#example');
+  const container = document.querySelector('#BaseDemo');
   console.log('Handsontable',Handsontable);
   hot = new Handsontable(container, hotOption);
   hot.addHook(

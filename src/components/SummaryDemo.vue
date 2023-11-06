@@ -1,6 +1,6 @@
 <template>
     <div class="table">
-    <div id="example2" class="handsonTable" language="zh-CN"></div>
+    <div id="SummaryDemo" class="handsonTable" language="zh-CN"></div>
     </div>
    
   </template>
@@ -128,7 +128,7 @@ language: 'zh-CN',
   
   // let hot = null
   function initHandsontable() {
-    const container = document.querySelector('#example2');
+    const container = document.querySelector('#SummaryDemo');
    new Handsontable(container, hotOption);
   }
   onMounted(() => {
@@ -137,24 +137,6 @@ language: 'zh-CN',
   })
   </script>
   <style lang="less" scoped>
-  .option-part {
-    position: fixed;
-    top: 80px;
-    z-index: 2;
-    background: #fff;
-    width: 100%;
-    height: 100px;
-    padding-top: 16px;
-    border-bottom: 1px solid #999;
-  }
-  .table{
-    height: calc(100vh - 150px);
-  
-  }
-  .handsonTable {
-    position: relative;
-    z-index: 1;
-  }
   </style>
   <!-- Add "scoped" attribute to limit CSS to this component only -->
   
