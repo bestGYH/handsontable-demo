@@ -131,25 +131,4 @@ onMounted(() => {
 
 })
 </script>
-<style lang="less" scoped>
-.option-part {
-  // position: relative;
-  top: 80px;
-  z-index: 2;
-  background: #fff;
-  width: 100%;
-  height: 100px;
-  padding-top: 16px;
-  border-bottom: 1px solid #999;
-}
-.table{
-  height: calc(100vh - 150px);
-
-}
-.handsonTable {
-  position: relative;
-  z-index: 1;
-}
-</style>
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 
