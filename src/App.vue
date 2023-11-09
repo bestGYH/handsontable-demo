@@ -3,7 +3,8 @@
     <a-tab-pane key="1" tab="BaseDemo"> <BaseDemo/></a-tab-pane>
     <a-tab-pane key="2" tab="SummaryDemo" ><SummaryDemo/></a-tab-pane>
     <a-tab-pane key="3" tab="CustomCellTypeDemo" ><CustomCellTypeDemo/></a-tab-pane>
-    <a-tab-pane key="4" tab="FormatDemo" ><FormatDemo/></a-tab-pane>
+    <a-tab-pane key="4" tab="CustomRendererDemo" ><CustomRendererDemo/></a-tab-pane>
+    <a-tab-pane key="5" tab="FormatDemo" ><FormatDemo/></a-tab-pane>
 
   </a-tabs>
 </template>
@@ -11,6 +12,7 @@
 import BaseDemo from './components/BaseDemo.vue'
 import SummaryDemo from './components/SummaryDemo.vue'
 import CustomCellTypeDemo from './components/CustomCellType/CustomCellTypeDemo.vue'
+import CustomRendererDemo from './components/CustomRenderer/CustomRendererDemo.vue'
 
 import FormatDemo from './components/FormatDemo.vue'
 

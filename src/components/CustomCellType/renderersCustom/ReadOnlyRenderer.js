@@ -23,7 +23,7 @@ const ReadOnlyRenderer = function (
 ) {
   // eslint-disable-next-line prefer-rest-params
   Handsontable.renderers.TextRenderer.apply(this, arguments);
-  td.style.backgroundColor = '#999';
+  td.style.backgroundColor = '#9eccea';
   const { rootDocument } = instance;
   const custom = rootDocument.createElement('div');
   custom.innerText = '这是自定义的render'

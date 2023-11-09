@@ -18,9 +18,9 @@ zhCN
 Handsontable.languages.registerLanguageDictionary(zhCN);
 
 const tableData = [
-  { id: 1, name: 'Ted', isActive: true, color: 'orange', date: '2015-01-01',salary:'100000' },
-  { id: 2, name: 'John', isActive: false, color: 'black', date: null,salary:'1000'  },
-  { id: 3, name: 'Al', isActive: true, color: 'red', date: null,salary:'1200' , remark: '黛玉笑道：“你说你会‘过目成诵’，难道我就不能‘一目十行’了！”(曹雪芹《红楼梦》)“You needn’t imagine you’re the only one with a good memory，”said Daiyu laughingly，“I suppose I’m allowed to remember lines too if I like.”' },
+  { id: 1, name: 'Ted', isActive: true, color: 'orange', date: '2015-01-01',},
+  { id: 2, name: 'John', isActive: false, color: 'black', date: null,remark:'看一眼，满是繁华;忘一眼，人事全非，还记得我吻你的额头，那是十八岁的夜晚，你笑着说，我会是你这一生最爱的那个，可现在呢，空房间里飘荡着浓烈的酒精味，一个人的孤单，听着伤感的音乐，带上耳机，泪水无处可躲，我第一次尝到了泪水的味道，咸咸的，很苦涩，在你离开之后，我把你的东西全都扔掉了，唯一没有扔掉的是我们的回忆，虽然我的爱情满目疮痍，不忍直视，但是我不后悔曾经爱过你，我苦笑着释怀这一切，你已不会再回来。****看一眼，满是繁华;忘一眼，人事全非，还记得我吻你 的额头，那是十八岁的夜晚，你笑着说，我会是你这一生最爱的那个，可现在呢，空房间里飘荡着浓烈的酒精味，一个人的孤单，听着伤感的音乐，带上耳机，泪水无处可躲，我第一次尝到了泪水的味道，咸咸的，很苦涩，在你离开之后，我把你的东西全都扔掉了，唯一没有扔掉的是我们的回忆，虽然我的爱情满目疮痍，不忍直视，但是我不后悔曾经爱过你，我苦笑着释怀这一切，你已不会再回来。'  },
+  { id: 3, name: 'Al', isActive: true, color: 'red', date: null, remark: '黛玉笑道：“你说你会‘过目成诵’，难道我就不能‘一目十行’了！”(曹雪芹《红楼梦》)“You needn’t imagine you’re the only one with a good memory，”said Daiyu laughingly，“I suppose I’m allowed to remember lines too if I like.”' },
   { id: 4, name: 'Ben', isActive: false, color: 'blue', date: null, remark: 'It‘s been a long day without you my friend' },
   { id: 5, name: 'Jane', isActive: false, color: 'blue', date: null, remark: 'Wherever you are, and whoever you may be, there is one thing in which you and I are just alike at this moment, all in all the moments of our existence. We are not at rest; we are on a journey. Our life is a movement, a tendency, a steady, ceaseless progress towards an unseen goal. We are gaining something, or losing something, every day.' }
 
@@ -66,14 +66,6 @@ let hotOption = {
       source: ["yellow", "red", "orange", "green", "blue", "gray", "black", "white"]
     },
     {
-      data:'salary',
-    type: 'numeric',
-    // set desired format pattern and
-    numericFormat: {
-      pattern: '0,00.00',
-    }
-  },
-    {
       data: "remark",
       type: 'text',
       width: 300
@@ -88,7 +80,7 @@ let hotOption = {
     if (row === 0 && col === 0) {
       this.renderer = greenRenderer;
     }
-    if (row === 1 && col === 1) {
+    if (row === 1 && (col === 1||col===5)) {
       this.readOnly = true
     }
     if (row === 4 && col === 1) {

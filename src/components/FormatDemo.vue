@@ -2,9 +2,9 @@
 <template>
     <div class="table">
         <div class="option-part">
-            <span class="option-label">cellTypeList:</span> <a-select ref="select" v-model:value="value1" style="width: 120px"
-                :options="options1" @change="handleChange"></a-select><br/>
-                <span class="option-label">sourceData:</span> {{allData[value1]  }}
+            <span class="option-label">cellTypeList:</span> <a-select ref="select" v-model:value="value1"
+                style="width: 120px" :options="options1" @change="handleChange"></a-select><br />
+            <span class="option-label">sourceData:</span> {{ allData[value1] }}
         </div>
         <div id="FormatDemo" class="handsonTable"></div>
 
@@ -16,7 +16,7 @@
 // 官方链接： https://handsontable.com/docs/javascript-data-grid/numeric-cell-type/?_ga=2.139984691.1892691033.1699261278-640919250.1672052450
 import 'handsontable/dist/handsontable.full.min.css';
 import Handsontable from 'handsontable';
-import {  onMounted, ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import
 zhCN
     from 'handsontable/es/i18n/languages/zh-CN.js';
@@ -30,6 +30,7 @@ import 'handsontable/dist/handsontable.full.min.css';
 numbro.registerLanguage(jaJP);
 numbro.registerLanguage(trTR);//土耳其
 numbro.registerLanguage(deDE);
+
 const value1 = ref('time');
 const options1 = ref([
     {
@@ -51,11 +52,22 @@ const handleChange = (value) => {
     columns = allColumns[value]
     tableData = allData[value]
     colHeaders = allColHeaders[value]
+    let cell = null
+    if (value === 'time') {
+        cell = [
+            { row: 2, col: 2, timeFormat: 'hh:mm:ss', type: 'time' },
+        ]
+    } else if (value === 'numeric') {
+        cell = [
+            { row: 2, col: 4, numericFormat: { pattern: '0,0 %' }, type: 'numeric' },
+        ]
+    }
     hot.updateSettings({
-    data: tableData,
-    columns,
-    colHeaders
-  })
+        data: tableData,
+        columns,
+        colHeaders,
+        cell
+    })
 };
 // define formats
 const formatJP = {
@@ -73,7 +85,7 @@ const formatDE = {
 };
 const formatUS = {
     pattern: '$0,0.00',
-        culture: 'en-US', // this is the default culture, set up for USD
+    culture: 'en-US', // this is the default culture, set up for USD
 };
 const allColumns = {
     numeric: [
@@ -160,25 +172,29 @@ const allColumns = {
 }
 const allData = {
     numeric: [
-    {
-      productName: 'Product A',
-      JP_price: 1450.32,
-      TR_price: 202.14,
-      DE_price: 302.14,
-      US_price: 2,
+        {
+            productName: 'Product A',
+            JP_price: 1450.32,
+            TR_price: 202.14,
+            DE_price: 302.14,
+            US_price: 2,
 
-    },
-    {
-      productName: 'Product B',
-      JP_price: 2430.22,
-      TR_price: 338.86,
-    },
-    {
-      productName: 'Product C',
-      JP_price: 3120.10,
-      TR_price: 435.20,
-    },
-  ],
+        },
+        {
+            productName: 'Product B',
+            JP_price: 2430.22,
+            TR_price: 338.86,
+            US_price: 1000,
+
+        },
+        {
+            productName: 'Product C',
+            JP_price: 3120.10,
+            TR_price: 435.20,
+            US_price: 1000,
+
+        },
+    ],
     date: [
         ['Mercedes', 'A 160', '01/14/2021', 6999.95],
         ['Citroen', 'C4 Coupe', '12/01/2022', 8330],
@@ -197,13 +213,13 @@ const allData = {
 }
 const allColHeaders = {
     numeric: ['Product name', 'Price in Japan', 'Price in Turkey', 'Price in German'],
-    date:['Car', 'Model', 'Registration date', 'Price'],
-    time:['Car', 'Model', 'Registration time', 'Price'],
+    date: ['Car', 'Model', 'Registration date', 'Price'],
+    time: ['Car', 'Model', 'Registration time', 'Price'],
 
 }
 
 let columns = allColumns[value1.value]
-let tableData =[... allData[value1.value]]
+let tableData = [...allData[value1.value]]
 let colHeaders = allColHeaders[value1.value]
 
 
@@ -223,19 +239,21 @@ let hotOption = {
     colHeaders,
     columnSorting: true,
     columns,
-
+    cell: [
+        { row: 2, col: 2, timeFormat: 'hh:mm:ss', type: 'time' },
+    ],
 }
 function initHandsontable() {
     const container = document.querySelector('#FormatDemo');
     hot = new Handsontable(container, hotOption);
     hot.validateCells();
 
-  /* 
-  By default, the values entered into the time-type column are not validated,
-   so if you want them to display in the proper format, 
-remember to call hot.validateCells() after the table initialization.
-*/
-    
+    /* 
+    By default, the values entered into the time-type column are not validated,
+     so if you want them to display in the proper format, 
+  remember to call hot.validateCells() after the table initialization.
+  */
+
 }
 onMounted(() => {
     initHandsontable()

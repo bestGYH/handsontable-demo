@@ -9,7 +9,7 @@ class ReadOnlyEditor extends Handsontable.editors.TextEditor {
   }
 
   prepare(row, col, prop, td, originalValue, cellProperties) {
-    cellProperties.readOnly = true;
+    cellProperties.readOnly=true
     super.prepare(row, col, prop, td, originalValue, cellProperties);
   }
 }
