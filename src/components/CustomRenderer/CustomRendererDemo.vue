@@ -1,9 +1,7 @@
 <!-- eslint-disable no-unused-vars -->
 <template>
     <div class="table">
-
         <div id="CustomRendererDemo" class="handsonTable"></div>
-
     </div>
 </template>
   
@@ -58,21 +56,6 @@ function safeHtmlRenderer(instance, td, row, col, prop, value, cellProperties) {
     td.innerHTML = value;
 }
 
-// eslint-disable-next-line no-unused-vars
-function coverRenderer(instance, td, row, col, prop, value, cellProperties) {
-    const img = document.createElement('img');
-
-    img.src = value;
-
-    img.addEventListener('mousedown', event => {
-        event.preventDefault();
-    });
-
-    td.innerText = '';
-    td.appendChild(img);
-
-    return td;
-}
 let isChecked = false;
 // eslint-disable-next-line no-unused-vars
 function customRenderer(instance, td, row, col, prop, value, cellProperties) {
@@ -109,7 +92,7 @@ let columns = [
     { data: 'title', renderer: 'html' },
     { data: 'description', renderer: 'html' },
     { data: 'comments', renderer: safeHtmlRenderer },
-    { data: 'cover', renderer: coverRenderer },
+    { data: 'cover', renderer: 'DiversityRenderer' },
     {},
     { renderer: customRenderer },
     { data: 'email', validator: emailValidator, allowInvalid: false }
@@ -117,7 +100,7 @@ let columns = [
 let cell = [
     { row: 1, col: 2, renderer: customRenderer },
     { row: 1, col: 4, placeholder: 'empty cell', type: 'text', readOnly: true, readOnlyCellClassName: 'is-readOnly', },
-    // { row: 1, col: 2, renderer: 'DiversityRenderer' },
+    { row: 2, col: 4, renderer: 'DiversityRenderer' },
 
 ]
 let hot = null
@@ -140,6 +123,7 @@ let hotOption = {
 }
 // eslint-disable-next-line no-unused-vars
 let DiversityRendererF = new DiversityRenderer(Handsontable)
+
 console.log('DiversityRendererF', DiversityRendererF);
 Handsontable.renderers.registerRenderer('DiversityRenderer', DiversityRendererF.diversityRenderer)
 function initHandsontable() {

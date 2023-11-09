@@ -9,15 +9,12 @@ class DiversityRenderer  {
       }
       diversityRenderer(instance, td, row, col, prop, value, cellProperties) {
         console.log('diversityRenderer',instance, td, row, col, prop, value, cellProperties);
-        console.log(this.hot.getCellMeta(row,col));
+        console.log(instance.getCellMeta(row,col));
         const img = document.createElement('img');
-    
         img.src = value;
-    
         img.addEventListener('mousedown', event => {
             event.preventDefault();
         });
-    
         td.innerText = '';
         td.appendChild(img);
     

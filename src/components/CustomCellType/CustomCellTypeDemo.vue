@@ -2,7 +2,7 @@
 <template>
   <div class="table">
     <div class="option-part">
-            <a-button type="primary" @click="onSetCellType">设置第E列3行单元格type为ReadOnlyType</a-button>
+            <a-button type="primary" @click="onSetCellType">设置第E3单元格type为ReadOnlyType</a-button>
         </div>
     <div id="CustomCellTypeDemo" class="handsonTable"></div>
   </div>
@@ -143,6 +143,7 @@ function onSetCellType(){
         cell:[...hotOption.cell,{row:2,col:4,type:'ReadOnlyType'}]
     })
 }
+
 onMounted(() => {
   initHandsontable()
 })
