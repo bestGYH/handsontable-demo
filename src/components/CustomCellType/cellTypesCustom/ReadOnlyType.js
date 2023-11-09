@@ -6,5 +6,7 @@ import ReadOnlyRenderer from "../renderersCustom/ReadOnlyRenderer";
 export default {
   editor: ReadOnlyEditor,
   // renderer: Handsontable.renderers.TextRenderer,
-  renderer:ReadOnlyRenderer
+  renderer:ReadOnlyRenderer,
+  readOnly:true,
+  className:"custom-cell"
 };

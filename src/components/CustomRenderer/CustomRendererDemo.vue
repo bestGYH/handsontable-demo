@@ -1,9 +1,7 @@
 <!-- eslint-disable no-unused-vars -->
 <template>
     <div class="table">
-        <div class="option-part">
 
-        </div>
         <div id="CustomRendererDemo" class="handsonTable"></div>
 
     </div>
@@ -141,13 +139,12 @@ let hotOption = {
     cell,
 }
 // eslint-disable-next-line no-unused-vars
-let DiversityRendererF =  new DiversityRenderer(Handsontable)
-console.log('DiversityRendererF',DiversityRendererF);
-Handsontable.renderers.registerRenderer('DiversityRenderer',DiversityRendererF.diversityRenderer)
+let DiversityRendererF = new DiversityRenderer(Handsontable)
+console.log('DiversityRendererF', DiversityRendererF);
+Handsontable.renderers.registerRenderer('DiversityRenderer', DiversityRendererF.diversityRenderer)
 function initHandsontable() {
     const container = document.querySelector('#CustomRendererDemo');
     hot = new Handsontable(container, hotOption);
-
 
     container.addEventListener('mousedown', event => {
         if (event.target.nodeName == 'INPUT' && event.target.className == 'checker') {
