@@ -59,13 +59,15 @@ function safeHtmlRenderer(instance, td, row, col, prop, value, cellProperties) {
 let isChecked = false;
 // eslint-disable-next-line no-unused-vars
 function customRenderer(instance, td, row, col, prop, value, cellProperties) {
-    // console.log('customRenderer', td, row, col, prop, value, cellProperties);
-    Handsontable.renderers.TextRenderer.apply(this, arguments);
-
+    if (row === 2 && col === 2) {
+        //劫持diversityRenderer方法，继承其属性.
+        DiversityRendererF.diversityRenderer.apply(this, arguments);
+    }
+    console.log('customRenderer', td, row, col, prop, value, cellProperties);
     if (isChecked) {
         td.style.backgroundColor = 'yellow';
     } else {
-        td.style.backgroundColor = 'white';
+        td.style.backgroundColor = '#a4a4eb';
     }
 }
 let colHeaders = (col) => {
@@ -126,10 +128,35 @@ let DiversityRendererF = new DiversityRenderer(Handsontable)
 
 console.log('DiversityRendererF', DiversityRendererF);
 Handsontable.renderers.registerRenderer('DiversityRenderer', DiversityRendererF.diversityRenderer)
+function afterRender(isForced) {
+    console.log('afterRender', isForced);
+}
+/**
+ * @Descripttion: 
+ * @msg: 
+ * @param {*} TD    HTMLTableCellElement	Currently rendered cell's TD element.
+ * @param {*} row   Number	Visual row index.
+ * @param {*} column    Number	Visual column index.
+ * @param {*} prop  String | Number	Column property name or a column index, if datasource is an array of arrays.
+ * @param {*} value *	Value of the rendered cell.
+ * @param {*} cellProperties    Object	Object containing the cell's properties.
+ * @return {*}
+ */
+function afterRenderer(TD, row, column, prop, value, cellProperties) {
+    console.log('afterRenderer', TD, row, column, prop, value, cellProperties);
+}
 function initHandsontable() {
     const container = document.querySelector('#CustomRendererDemo');
     hot = new Handsontable(container, hotOption);
 
+    hot.addHook(
+        "afterRender",
+        afterRender,
+    );
+    hot.addHook(
+        "afterRenderer",
+        afterRenderer,
+    );
     container.addEventListener('mousedown', event => {
         if (event.target.nodeName == 'INPUT' && event.target.className == 'checker') {
             event.stopPropagation();
@@ -139,8 +166,7 @@ function initHandsontable() {
         if (event.target.nodeName == 'INPUT' && event.target.className == 'checker') {
             isChecked = !event.target.checked;
             hot.setCellMeta(1, 4, 'renderer', customRenderer)
-            hot.setCellMeta(2, 2, 'renderer', customRenderer)
-
+            hot.setCellMeta(2, 4, 'renderer', customRenderer)
             hot.render();
         }
     });
