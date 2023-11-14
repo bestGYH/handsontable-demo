@@ -1,5 +1,8 @@
 <!-- eslint-disable no-unused-vars -->
 <template>
+    <div class="option-part">
+        <a-button type="primary" @click="onSetCellType">使用插件api</a-button>
+    </div>
     <div class="table">
         <div id="CustomRendererDemo" class="handsonTable"></div>
     </div>
@@ -18,6 +21,7 @@ zhCN
 Handsontable.languages.registerLanguageDictionary(zhCN);
 import 'handsontable/dist/handsontable.full.min.css';
 import DiversityRenderer from './DiversityRenderer.js'
+
 const emailValidator = (value, callback) => {
     setTimeout(() => {
         if (/.+@.+/.test(value)) {
@@ -49,7 +53,6 @@ let tableData = [
         cover: 'https://handsontable.com/docs/img/examples/javascript-the-definitive-guide.jpg'
     }
 ]
-// eslint-disable-next-line no-unused-vars
 function safeHtmlRenderer(instance, td, row, col, prop, value, cellProperties) {
     // WARNING: Be sure you only allow certain HTML tags to avoid XSS threats.
     // Sanitize the "value" before passing it to the innerHTML property.
@@ -57,7 +60,6 @@ function safeHtmlRenderer(instance, td, row, col, prop, value, cellProperties) {
 }
 
 let isChecked = false;
-// eslint-disable-next-line no-unused-vars
 function customRenderer(instance, td, row, col, prop, value, cellProperties) {
     if (row === 2 && col === 2) {
         //劫持diversityRenderer方法，继承其属性.
@@ -123,7 +125,6 @@ let hotOption = {
     columns,
     cell,
 }
-// eslint-disable-next-line no-unused-vars
 let DiversityRendererF = new DiversityRenderer(Handsontable)
 
 console.log('DiversityRendererF', DiversityRendererF);

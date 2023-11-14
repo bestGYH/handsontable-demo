@@ -256,6 +256,8 @@ function initHandsontable() {
 
 }
 onMounted(() => {
+  console.log('onMounted');
+
     initHandsontable()
 })
 </script>
