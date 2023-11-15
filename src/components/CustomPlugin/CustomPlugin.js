@@ -100,11 +100,9 @@ export class CustomPlugin extends Handsontable.plugins.BasePlugin {
    * Checks if the plugin is enabled in the settings.
    */
   isEnabled() {
-    return this.hot.getSettings().search;
-    // eslint-disable-next-line no-unreachable
-    const pluginSettings = this.getUnifiedConfig();
-
-    return pluginSettings.enabled;
+    return this.hot.getSettings().customPlugin;
+    // const pluginSettings = this.getUnifiedConfig();
+    // return pluginSettings.enabled;
   }
 
   /**
@@ -113,9 +111,9 @@ export class CustomPlugin extends Handsontable.plugins.BasePlugin {
    * This method is run only if the `isEnabled` method returns `true`.
    */
   enablePlugin() {
-    // if (this.enabled) {
-    //   return;
-    // }
+    if (this.enabled) {
+      return;
+    }
     // Get the plugin's configuration from the initialization object.
     this.configuration = this.getUnifiedConfig();
 
@@ -202,7 +200,7 @@ export class CustomPlugin extends Handsontable.plugins.BasePlugin {
     super.destroy();
   }
 }
-//  Handsontable.plugins.registerPlugin('customPlugin',CustomPlugin)
+ Handsontable.plugins.registerPlugin('customPlugin',CustomPlugin)
 //  registerPlugin('customPlugin', CustomPlugin);
 //  registerPlugin(CustomPlugin);// 13.1.0支持
 

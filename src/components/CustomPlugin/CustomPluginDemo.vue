@@ -1,7 +1,17 @@
 <template>
   <div class="table">
     <div class="option-part">
-      <a-button type="primary" @click="onUseApi">use plugin API</a-button>
+      <a-input-search
+      style="width:400px;margin-right:24px;"
+      v-model:value="searchValue"
+      placeholder="input search text"
+      enter-button="Search"
+      size="middle"
+      @search="onSearch"
+    />
+    <a-button type="primary" @click="onUseApi">Use plugin API</a-button>
+
+     <h3>搜索结果：{{ searchResult }}</h3> 
     </div>
     <div id="CustomPluginDemo" class="handsonTable"></div>
   </div>
@@ -10,7 +20,7 @@
 <script setup>
 import 'handsontable/dist/handsontable.full.min.css';
 import Handsontable from 'handsontable';
-import { onMounted, onDeactivated, onBeforeUnmount, onUnmounted } from 'vue';
+import { ref,onMounted, onDeactivated, onBeforeUnmount, onUnmounted } from 'vue';
 import
 zhCN
   from 'handsontable/es/i18n/languages/zh-CN.js';
@@ -27,14 +37,14 @@ const generateData = (rows = 3, columns = 7, additionalRows = true) => {
 
   // add an empty row at the bottom, to display column summaries
   if (additionalRows) {
-    array2d.push([]);
+    array2d.push(['测试','测试搜索']);
 
   }
 
   return array2d;
 };
 let hot = null
-Handsontable.plugins.registerPlugin('customPlugin', CustomPlugin)
+// Handsontable.plugins.registerPlugin('customPlugin', CustomPlugin)
 let hotOption = {
   data: generateData(10, 10),
   width: '100%',
@@ -48,14 +58,15 @@ let hotOption = {
   persistentState: true,
   licenseKey: 'non-commercial-and-evaluation',
   language: 'zh-CN',
-  [CustomPlugin.PLUGIN_KEY]: true,
   currentRowClassName: 'currentRow',
   currentColClassName: 'currentCol',
   commentedCellClassName: 'has-comment',
   invalidCellClassName: 'highlight--error',
+  [CustomPlugin.PLUGIN_KEY]: true,
+  search:true,
+ 
 
 }
-let customPluginInstance = null
 function afterDrawSelection(currentRow, currentColumn, cornersOfSelection) {
   const selection = hot?.selection;
   if (!selection) return;
@@ -77,26 +88,26 @@ function afterDrawSelection(currentRow, currentColumn, cornersOfSelection) {
     return addClassName;
   }
 }
+let customPluginInstance = null
 function initHandsontable() {
   const container = document.querySelector('#CustomPluginDemo');
   hot = new Handsontable(container, hotOption);
-  console.log(hot.getPlugin('customPlugin'));
   hot.addHook("afterDrawSelection", afterDrawSelection);
+  console.log(hot.getPlugin('customPlugin'));
   customPluginInstance = hot.getPlugin('customPlugin')
 }
 function onUseApi() {
   customPluginInstance.externalMethodExample();
 }
-
-onUnmounted(() => {
-  console.log('onDeactivated');
+const searchValue = ref('')
+let searchResult = ref('')
+function onSearch(searchValue){
+  const searchInstance = hot.getPlugin('search')
+  searchInstance.setSearchResultClass('search-cell')
+  searchResult.value =  searchInstance.query(searchValue)
+  console.log(' searchInstance.query(测试)', searchResult.value);
+  hot.render();
 }
-)
-onBeforeUnmount(() => {
-  console.log('onBeforeUnmount');
-  // customPluginInstance.destroy()
-  customPluginInstance.enablePlugin()
-})
 onMounted(() => {
   console.log('onMounted');
   initHandsontable()
@@ -117,6 +128,11 @@ onMounted(() => {
 
 .highlight--error {
   color: blue
+}
+.search-cell{
+ background:rgb(207, 174, 240)!important;
+ color: blue
+
 }
 </style>
   
