@@ -91,7 +91,7 @@ let hotOption = {
   fixedColumnsLeft: 3,
   fixedRowsTop: 5,
   // fixedRowsBottom: 3,
-  manualColumnFreeze: true
+  manualColumnFreeze: true,
 
 }
 

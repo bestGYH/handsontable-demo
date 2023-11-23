@@ -172,7 +172,7 @@ export class CustomPlugin extends Handsontable.plugins.BasePlugin {
    */
   externalMethodExample() {
     // Method definition.
-    console.log('externalMethodExample', this.hot);
+    this.hot.selectCell(2, 4, 3, 5);
 
   }
 

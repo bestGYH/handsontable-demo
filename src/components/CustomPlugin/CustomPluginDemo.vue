@@ -9,7 +9,7 @@
       size="middle"
       @search="onSearch"
     />
-    <a-button type="primary" @click="onUseApi">Use plugin API</a-button>
+    <a-button type="primary" @click="onUseApi">Use plugin API(selectCell)</a-button>
 
      <h3>搜索结果：{{ searchResult }}</h3> 
     </div>
@@ -111,7 +111,9 @@ function onSearch(searchValue){
 onMounted(() => {
   console.log('onMounted');
   initHandsontable()
+
 })
+
 </script>
 <style>
 .currentCol {

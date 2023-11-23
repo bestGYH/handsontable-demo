@@ -32,7 +32,7 @@ import FormatDemo from './components/FormatDemo.vue'
 
 
 import { ref } from 'vue';
-const activeKey = ref('1');
+const activeKey = ref('5');
 </script>
 <style>@import "@/assets/common.less";
 
